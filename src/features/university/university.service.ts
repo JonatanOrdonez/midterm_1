@@ -21,6 +21,26 @@ export const getCoursesService = async (): Promise<Course[]> => {
   return getCoursesRepository();
 };
 
+export const getStudentByIdService = async (studentId: string): Promise<Student> => {
+  const student = await getStudentByIdRepository(studentId);
+
+  if (!student) {
+    throw Boom.notFound('Student not found');
+  }
+
+  return student;
+};
+
+export const getCourseByIdService = async (courseId: string): Promise<Course> => {
+  const course = await getCourseByIdRepository(courseId);
+
+  if (!course) {
+    throw Boom.notFound('Course not found');
+  }
+
+  return course;
+};
+
 export const getEnrollmentsService = async (): Promise<Enrollment[]> => {
   return getEnrollmentsRepository();
 };

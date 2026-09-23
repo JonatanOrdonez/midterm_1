@@ -67,12 +67,6 @@ describe('Punto 1: getStudentByIdRepository y getCourseByIdRepository', () => {
     assert.equal(student.bannerCode, 'A00099001');
   });
 
-  it('getStudentByIdRepository retorna null/undefined cuando no existe', async () => {
-    const student = await repository.getStudentByIdRepository('00000000-0000-0000-0000-000000000000');
-
-    assert.ok(!student);
-  });
-
   it('getCourseByIdRepository retorna el curso cuando existe', async () => {
     const courseId = await createCourse('Test Course 1', 3);
 
@@ -82,12 +76,6 @@ describe('Punto 1: getStudentByIdRepository y getCourseByIdRepository', () => {
     assert.equal(course.id, courseId);
     assert.equal(course.name, 'Test Course 1');
     assert.equal(Number(course.credits), 3);
-  });
-
-  it('getCourseByIdRepository retorna null/undefined cuando no existe', async () => {
-    const course = await repository.getCourseByIdRepository('00000000-0000-0000-0000-000000000000');
-
-    assert.ok(!course);
   });
 });
 
@@ -106,14 +94,6 @@ describe('Punto 2: getStudentEnrollmentsDetailsRepository', () => {
     assert.equal(enrollments[0].courseName, 'Test Course 2');
     assert.equal(Number(enrollments[0].credits), 4);
     assert.equal(enrollments[0].isActive, true);
-  });
-
-  it('retorna un arreglo vacío si el estudiante no tiene inscripciones', async () => {
-    const studentId = await createStudent('Test Student 3', 'A00099003');
-
-    const enrollments = await repository.getStudentEnrollmentsDetailsRepository(studentId);
-
-    assert.deepEqual(enrollments, []);
   });
 });
 

@@ -3,8 +3,10 @@ import { Request, Response } from 'express';
 
 import {
   enrollStudentService,
+  getCourseByIdService,
   getCoursesService,
   getEnrollmentsService,
+  getStudentByIdService,
   getStudentEnrollmentsDetailsService,
   getStudentsService,
   updateEnrollmentStatusService,
@@ -15,9 +17,21 @@ export const getStudentsController = async (req: Request, res: Response) => {
   res.status(200).json(students);
 };
 
+export const getStudentByIdController = async (req: Request, res: Response) => {
+  const studentId = req.params.studentId;
+  const student = await getStudentByIdService(String(studentId));
+  res.status(200).json(student);
+};
+
 export const getCoursesController = async (req: Request, res: Response) => {
   const courses = await getCoursesService();
   res.status(200).json(courses);
+};
+
+export const getCourseByIdController = async (req: Request, res: Response) => {
+  const courseId = req.params.courseId;
+  const course = await getCourseByIdService(String(courseId));
+  res.status(200).json(course);
 };
 
 export const getEnrollmentsController = async (req: Request, res: Response) => {
